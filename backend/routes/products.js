@@ -1,57 +1,54 @@
 // Express
 
-const express = require('express')
+const express = require("express");
+
+// Imports
+
+const {
+  postProduct,
+  getProducts,
+  getProduct,
+  deleteProduct,
+  patchProduct,
+  getProteins,
+  getCreatines,
+  getPreWorkouts,
+} = require("../controller/productController");
 
 // Router
 
-const router = express.Router()
+const router = express.Router();
 
 // Get All Products
 
-router.get('/', (req, res) => {
-    res.json({msg: 'GET All Products'})
-})
+router.get("/", getProducts);
 
 // Get All Protein Products
 
-router.get('/protein', (req, res) => {
-    res.json({msg: 'GET All Protein Products'})
-})
+router.get("/protein", getProteins);
 
-// Get All Products
+// Get All Creatine Products
 
-router.get('/creatine', (req, res) => {
-    res.json({msg: 'GET All Creatine Products'})
-})
+router.get("/creatine", getCreatines);
 
 // Get All Pre-Workout Products
 
-router.get('/pre-workout', (req, res) => {
-    res.json({msg: 'GET All Pre-Workout Products'})
-})
+router.get("/pre-workout", getPreWorkouts);
 
 // Get A Single Product
 
-router.get('/:id', (req, res) => {
-    res.json({msg: 'Get A Single Product'})
-})
+router.get("/:id", getProduct);
 
-// Post A New Workout
+// Post A New Product
 
-router.post('/', (req, res) => {
-    res.json({msg: 'Post A New Workout'})
-})
+router.post("/", postProduct);
 
-// Delete A New Workout
+// Delete A Product
 
-router.delete('/', (req, res) => {
-    res.json({msg: 'Delete A New Workout'})
-})
+router.delete("/:id", deleteProduct);
 
-// Patch A New Workout
+// Patch A Product
 
-router.patch('/', (req, res) => {
-    res.json({msg: 'Patch A New Workout'})
-})
+router.patch("/:id", patchProduct);
 
-module.exports = router
+module.exports = router;
