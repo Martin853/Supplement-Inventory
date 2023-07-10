@@ -35,7 +35,7 @@ export const Navbar = () => {
           Pre-Workout
         </Link>
         <Link
-          to={"/manage-invetory"}
+          to={"/manage-inventory"}
           className='border-t-2 border-b-2 py-1 border-indigo-950 text-center'
         >
           Manage Invetory
