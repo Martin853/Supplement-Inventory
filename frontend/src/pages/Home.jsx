@@ -29,7 +29,7 @@ export const Home = () => {
           <Product key={product._id} product={product} />
         ))
       ) : (
-        <div className='flex flex-col justify-center items-center gap-3 h-screen'>
+        <div className='flex flex-col justify-center items-center gap-3 w-screen h-screen'>
           <h1 className='text-4xl'>Loading...</h1>
           <AiOutlineLoading3Quarters className='animate-spin text-4xl ' />
         </div>
