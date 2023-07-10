@@ -1,45 +1,58 @@
 // Enviroment variables
 
-require('dotenv').config()
+require("dotenv").config();
 
 // Express
 
-const express = require('express')
+const express = require("express");
 
 // Mongoose
 
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-// Products Router 
+// Products Router
 
-const productsRouter = require('./routes/products')
+const productsRouter = require("./routes/products");
 
 // App
 
-const app = express()
+const app = express();
+
+// Cors
+
+const cors = require("cors");
 
 // Middleware
 
-app.use(express.json())
+app.use(express.json());
 
 app.use((req, res, next) => {
-    console.log(req.path, req.method)
-    next()
-})
+  console.log(req.path, req.method);
+  next();
+});
 
 // Routes
 
-app.use('/api/products', productsRouter)
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 
-// Connect to database 
+app.use("/api/products", productsRouter);
 
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => {
-        // Initialize the app to listen to port
-        
-        const PORT = process.env.PORT
-        app.listen(PORT, () => console.log(`Connected to database, Listening on port ${PORT}`))
-    })
-    .catch((error) => {
-        console.log(error)
-    })
+// Connect to database
+
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    // Initialize the app to listen to port
+
+    const PORT = process.env.PORT;
+    app.listen(PORT, () =>
+      console.log(`Connected to database, Listening on port ${PORT}`)
+    );
+  })
+  .catch((error) => {
+    console.log(error);
+  });
