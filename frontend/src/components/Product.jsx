@@ -8,7 +8,7 @@ export const Product = ({ product }) => {
     <div className='flex flex-col w-full bg-neutral-100 rounded-lg h-fit p-4 border-2 border-neutral-300 justify-center items-start'>
       <h1 className='text-green-600 text-2xl font-black'>{product.title}</h1>
       <h1>
-        Category:
+        Category: {""}
         <Link
           to={`${baseURL}/${product.category.toLowerCase()}`}
           className='text-blue-600'
