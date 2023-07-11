@@ -3,6 +3,7 @@ import { useProductsContext } from "../hooks/useProductsContext";
 
 export const ProductForm = () => {
   const { dispatch } = useProductsContext();
+
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
@@ -37,7 +38,7 @@ export const ProductForm = () => {
       setPrice("");
       setError(null);
       console.log("New workout added, ", json);
-      dispatch({ type: "CREATE_PRODUCT", payload: json });
+      dispatch({ type: "CREATE_PRODUCTS", payload: json });
     }
   };
 
