@@ -1,9 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+import { useProductsContext } from "../hooks/useProductsContext";
 
 export const ProductManage = ({ product }) => {
   const baseURL = window.location.origin;
+  const { dispatch } = useProductsContext();
+
+  const handleDelete = async () => {
+    const response = await fetch(
+      "http://localhost:3000/api/products/" + product._id,
+      {
+        method: "DELETE",
+      }
+    );
+
+    const json = await response.json();
+
+    if (response.ok) {
+      dispatch({ type: "DELETE_PRODUCT", payload: json });
+    }
+  };
 
   return (
     <div className='flex flex-col w-full bg-neutral-100 rounded-lg h-fit p-4 border-2 border-neutral-300 justify-center items-start'>
@@ -25,7 +42,10 @@ export const ProductManage = ({ product }) => {
           <AiFillEdit />
           Edit
         </button>
-        <button className='w-full flex justify-center items-center gap-2 bg-red-400 border-red-500 border-2 p-2 rounded-lg text-white font-semibold hover:bg-red-500 transition-all ease-in-out duration-300'>
+        <button
+          onClick={handleDelete}
+          className='w-full flex justify-center items-center gap-2 bg-red-400 border-red-500 border-2 p-2 rounded-lg text-white font-semibold hover:bg-red-500 transition-all ease-in-out duration-300'
+        >
           <AiFillDelete />
           Delete
         </button>
