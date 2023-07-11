@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useProductsContext } from "../hooks/useProductsContext";
 
 export const ProductForm = () => {
-  const { disptact } = useProductsContext();
+  const { dispatch } = useProductsContext();
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
