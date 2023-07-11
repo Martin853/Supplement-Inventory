@@ -23,7 +23,7 @@ export const ProductManage = ({ product }) => {
   };
 
   return (
-    <div className='flex flex-col w-full bg-neutral-100 rounded-lg h-fit p-4 border-2 border-neutral-300 justify-center items-start'>
+    <div className='flex flex-col w-full bg-neutral-100 rounded-lg h-50  p-4 border-2 border-neutral-300 justify-center items-start'>
       <h1 className='text-green-600 text-2xl font-black'>{product.title}</h1>
       <h1>
         Category:{"  "}
