@@ -69,9 +69,29 @@ const postProduct = async (req, res) => {
 
   const { title, category, price, quantity } = req.body;
 
+  let emptyFields = [];
+
+  if (!title) {
+    emptyFields.push("title");
+  }
+
+  if (!category) {
+    emptyFields.push("category");
+  }
+
+  if (!price) {
+    emptyFields.push("price");
+  }
+
+  if (!quantity) {
+    emptyFields.push("quantity");
+  }
+
   // Validation
   if (!title || !category || !price || !quantity) {
-    return res.status(400).json({ error: "Missing required fields" });
+    return res
+      .status(400)
+      .json({ error: "Missing required fields", emptyFields });
   }
 
   if (typeof price !== "number" || typeof quantity !== "number") {

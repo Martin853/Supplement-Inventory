@@ -9,6 +9,7 @@ export const ProductForm = () => {
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [error, setError] = useState(null);
+  const [emptyFields, setEmptyFields] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,6 +30,7 @@ export const ProductForm = () => {
 
     if (!response.ok) {
       setError(json.error);
+      setEmptyFields(json.emptyFields);
     }
 
     if (response.ok) {
@@ -37,6 +39,7 @@ export const ProductForm = () => {
       setQuantity("");
       setPrice("");
       setError(null);
+      setEmptyFields([]);
       console.log("New workout added, ", json);
       dispatch({ type: "CREATE_PRODUCTS", payload: json });
     }
@@ -52,7 +55,11 @@ export const ProductForm = () => {
       </h1>
       <label className='text-lg'>Product Title:</label>
       <input
-        className='outline-none p-2 rounded-lg border-2 border-gray-200'
+        className={
+          emptyFields.includes("title")
+            ? "outline-none p-2 rounded-lg border-2 border-red-400"
+            : "outline-none p-2 rounded-lg border-2 border-gray-200"
+        }
         type='text'
         onChange={(e) => {
           setTitle(e.target.value);
@@ -61,7 +68,11 @@ export const ProductForm = () => {
       />
       <label className='text-lg'>Product Category:</label>
       <select
-        className='outline-none p-2 rounded-lg border-2 border-gray-200'
+        className={
+          emptyFields.includes("category")
+            ? "outline-none p-2 rounded-lg border-2 border-red-400"
+            : "outline-none p-2 rounded-lg border-2 border-gray-200"
+        }
         value={category}
         onChange={(e) => {
           setCategory(e.target.value);
@@ -75,7 +86,11 @@ export const ProductForm = () => {
 
       <label className='text-lg'>Product Price:</label>
       <input
-        className='outline-none p-2 rounded-lg border-2 border-gray-200'
+        className={
+          emptyFields.includes("price")
+            ? "outline-none p-2 rounded-lg border-2 border-red-400"
+            : "outline-none p-2 rounded-lg border-2 border-gray-200"
+        }
         type='number'
         onChange={(e) => {
           setPrice(parseFloat(e.target.value));
@@ -84,7 +99,11 @@ export const ProductForm = () => {
       />
       <label className='text-lg'>Product Quantity:</label>
       <input
-        className='outline-none p-2 rounded-lg border-2 border-gray-200'
+        className={
+          emptyFields.includes("quantity")
+            ? "outline-none p-2 rounded-lg border-2 border-red-400"
+            : "outline-none p-2 rounded-lg border-2 border-gray-200"
+        }
         type='number'
         onChange={(e) => {
           setQuantity(parseInt(e.target.value));
