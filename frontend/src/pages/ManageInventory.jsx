@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { ProductManage } from "../components/ProductManage";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { ProductForm } from "../components/ProductForm";
+import { useProductsContext } from "../hooks/useProductsContext";
 
 export const ManageInventory = () => {
   // Products
 
-  const [products, setProducts] = useState(null);
+  const { products, dispatch } = useProductsContext();
 
   // Fetch Products
 
@@ -16,7 +17,7 @@ export const ManageInventory = () => {
       const json = await response.json();
 
       if (response.ok) {
-        setProducts(json);
+        dispatch({ type: "SET_PRODUCTS", payload: json });
       }
     };
 

@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Product } from "../components/Product";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useProductsContext } from "../hooks/useProductsContext";
 
 export const Home = () => {
   // Products
 
-  const [products, setProducts] = useState(null);
+  const { products, dispatch } = useProductsContext();
 
   // Fetch Products
 
@@ -15,7 +16,7 @@ export const Home = () => {
       const json = await response.json();
 
       if (response.ok) {
-        setProducts(json);
+        dispatch({ type: "SET_PRODUCTS", payload: json });
       }
     };
 

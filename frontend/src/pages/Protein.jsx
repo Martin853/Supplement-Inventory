@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Product } from "../components/Product";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useProductsContext } from "../hooks/useProductsContext";
 
 export const Protein = () => {
   // Protein
 
-  const [protein, setProtein] = useState(null);
+  const { products, dispatch } = useProductsContext();
 
   // Fetch Protein
 
@@ -17,7 +18,7 @@ export const Protein = () => {
       const json = await response.json();
 
       if (response.ok) {
-        setProtein(json);
+        dispatch({ type: "SET_PRODUCTS", payload: json });
       }
     };
 
@@ -26,8 +27,8 @@ export const Protein = () => {
 
   return (
     <div className='w-full p-4 grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3'>
-      {protein ? (
-        protein.map((product) => (
+      {products ? (
+        products.map((product) => (
           <Product key={product._id} product={product} />
         ))
       ) : (
