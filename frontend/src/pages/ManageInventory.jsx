@@ -13,7 +13,9 @@ export const ManageInventory = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const response = await fetch("http://localhost:3000/api/products");
+      const response = await fetch(
+        "https://supplement-inventroy.onrender.com/api/products"
+      );
       const json = await response.json();
 
       if (response.ok) {

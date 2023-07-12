@@ -13,7 +13,7 @@ export const Protein = () => {
   useEffect(() => {
     const fetchProtein = async () => {
       const response = await fetch(
-        "http://localhost:3000/api/products/protein"
+        "https://supplement-inventroy.onrender.com/api/products/protein"
       );
       const json = await response.json();
 

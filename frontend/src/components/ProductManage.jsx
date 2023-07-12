@@ -23,7 +23,7 @@ export const ProductManage = ({ product }) => {
 
   const handleDelete = async () => {
     const response = await fetch(
-      "http://localhost:3000/api/products/" + product._id,
+      "https://supplement-inventroy.onrender.com/api/products" + product._id,
       {
         method: "DELETE",
       }

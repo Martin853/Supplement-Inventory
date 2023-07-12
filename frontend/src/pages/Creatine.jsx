@@ -13,7 +13,7 @@ export const Creatine = () => {
   useEffect(() => {
     const fetchCreatine = async () => {
       const response = await fetch(
-        "http://localhost:3000/api/products/creatine"
+        "https://supplement-inventroy.onrender.com/api/products/creatine"
       );
       const json = await response.json();
 

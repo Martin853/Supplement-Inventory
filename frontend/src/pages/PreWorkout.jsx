@@ -13,7 +13,7 @@ export const PreWorkout = () => {
   useEffect(() => {
     const fetchPreWorkout = async () => {
       const response = await fetch(
-        "http://localhost:3000/api/products/pre-workout"
+        "https://supplement-inventroy.onrender.com/api/products/pre-workout"
       );
       const json = await response.json();
 

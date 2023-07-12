@@ -18,13 +18,16 @@ export const ProductForm = () => {
 
     console.log(product);
 
-    const response = await fetch("http://localhost:3000/api/products", {
-      method: "POST",
-      body: JSON.stringify(product),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      "https://supplement-inventroy.onrender.com/api/products",
+      {
+        method: "POST",
+        body: JSON.stringify(product),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     const json = await response.json();
 
