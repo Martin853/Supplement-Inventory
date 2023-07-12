@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 
 app.use(
   cors({
-    origin: "https://supplement-inventroy.onrender.com/",
+    origin: "https://supplement-inventory.netlify.app/",
   })
 );
 
