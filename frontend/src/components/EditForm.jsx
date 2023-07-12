@@ -24,7 +24,7 @@ export const EditForm = ({ product, setToggleEdit }) => {
     console.log(updatedProduct);
 
     const response = await fetch(
-      `http://localhost:3000/api/products/${product._id}`,
+      `https://supplement-inventroy.onrender.com/api/products/${product._id}`,
       {
         method: "PATCH",
         body: JSON.stringify(updatedProduct),
