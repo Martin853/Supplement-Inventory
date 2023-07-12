@@ -7,7 +7,7 @@ import { useProductsContext } from "../hooks/useProductsContext";
 export const ManageInventory = () => {
   // Products
 
-  const { products, dispatch } = useProductsContext();
+  const { products, refresh, dispatch } = useProductsContext();
 
   // Fetch Products
 
@@ -22,7 +22,7 @@ export const ManageInventory = () => {
     };
 
     fetchProducts();
-  }, []);
+  }, [refresh]);
 
   return (
     <div className='flex flex-col items-center w-full h-fit'>

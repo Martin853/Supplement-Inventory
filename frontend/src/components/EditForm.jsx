@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { useProductsContext } from "../hooks/useProductsContext";
 
 export const EditForm = ({ product, setToggleEdit }) => {
   // Variables
@@ -11,7 +12,47 @@ export const EditForm = ({ product, setToggleEdit }) => {
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
 
-  const handleSubmit = () => {};
+  const { dispatch } = useProductsContext();
+
+  // Patch Request
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const updatedProduct = { title, category, price, quantity };
+
+    console.log(updatedProduct);
+
+    const response = await fetch(
+      `http://localhost:3000/api/products/${product._id}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(updatedProduct),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const json = await response.json();
+
+    if (!response.ok) {
+      setError(json.error);
+      setEmptyFields(json.emptyFields);
+    }
+
+    if (response.ok) {
+      setTitle("");
+      setCategory("");
+      setQuantity("");
+      setPrice("");
+      setError(null);
+      setEmptyFields([]);
+      setToggleEdit(false);
+      console.log("Workout Updated, ", json);
+      dispatch({ type: "UPDATE_PRODUCT", payload: json });
+    }
+  };
 
   // Disable Scrolling
 
@@ -40,7 +81,12 @@ export const EditForm = ({ product, setToggleEdit }) => {
             <h1 className='text-sm sm:text-xl font-extrabold text-fuchsia-950'>
               Edit Product: {product._id}
             </h1>
-            <AiOutlineCloseCircle className='text-black text-4xl' />
+            <AiOutlineCloseCircle
+              onClick={() => {
+                setToggleEdit(false);
+              }}
+              className='text-black text-4xl hover:cursor-pointer'
+            />
           </div>
 
           <label className='text-lg'>Product Title:</label>
@@ -110,8 +156,9 @@ export const EditForm = ({ product, setToggleEdit }) => {
           <button
             type='submit'
             className='w-full h-fit mt-2 py-3 border-neutral-300 border-2 rounded-lg text-xl hover:bg-neutral-200 transition-all duration-300 ease-in-out font-bold'
+            onClick={handleSubmit}
           >
-            Create
+            Save Changes
           </button>
         </form>
       </div>

@@ -18,6 +18,17 @@ export const productsReducer = (state, action) => {
           (product) => product._id !== action.payload._id
         ),
       };
+    case "UPDATE_PRODUCT":
+      const updatedProducts = state.products.map((product) =>
+        product.id === action.payload.id
+          ? { ...product, propertyToUpdate: action.payload.propertyValue }
+          : product
+      );
+      return {
+        ...state,
+        products: updatedProducts,
+        refresh: !state.refresh, // Toggle the refresh flag
+      };
     default:
       return state;
   }

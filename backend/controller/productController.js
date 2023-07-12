@@ -137,6 +137,41 @@ const patchProduct = async (req, res) => {
     return res.status(404).json({ error: `Product doesn't exist` });
   }
 
+  // Values
+
+  const { title, category, price, quantity } = req.body;
+
+  let emptyFields = [];
+
+  if (!title) {
+    emptyFields.push("title");
+  }
+
+  if (!category) {
+    emptyFields.push("category");
+  }
+
+  if (!price) {
+    emptyFields.push("price");
+  }
+
+  if (!quantity) {
+    emptyFields.push("quantity");
+  }
+
+  // Validation
+  if (!title || !category || !price || !quantity) {
+    return res
+      .status(400)
+      .json({ error: "Missing required fields", emptyFields });
+  }
+
+  if (typeof price !== "number" || typeof quantity !== "number") {
+    return res
+      .status(400)
+      .json({ error: "Invalid data type for price or quantity" });
+  }
+
   const product = await Product.findOneAndUpdate(
     { _id: id },
     {
