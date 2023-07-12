@@ -49,6 +49,7 @@ mongoose
     // Initialize the app to listen to port
 
     const PORT = process.env.PORT;
+
     app.listen(PORT, () =>
       console.log(`Connected to database, Listening on port ${PORT}`)
     );
