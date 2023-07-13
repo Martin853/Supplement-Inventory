@@ -14,6 +14,10 @@ const mongoose = require("mongoose");
 
 const productsRouter = require("./routes/products");
 
+// User Router
+
+const userRouter = require("./routes/user");
+
 // App
 
 const app = express();
@@ -44,6 +48,7 @@ app.use(
 );
 
 app.use("/api/products", productsRouter);
+app.use("/api/user", userRouter);
 
 // Connect to database
 
