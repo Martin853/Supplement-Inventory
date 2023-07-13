@@ -13,7 +13,7 @@ export const Protein = () => {
   useEffect(() => {
     const fetchProtein = async () => {
       const response = await fetch(
-        "https://supplement-inventroy.onrender.com/api/products/protein"
+        `${import.meta.env.VITE_REQUEST_LINK}/api/products/protein`
       );
       const json = await response.json();
 

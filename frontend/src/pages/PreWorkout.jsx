@@ -13,7 +13,7 @@ export const PreWorkout = () => {
   useEffect(() => {
     const fetchPreWorkout = async () => {
       const response = await fetch(
-        "https://supplement-inventroy.onrender.com/api/products/pre-workout"
+        `${import.meta.env.VITE_REQUEST_LINK}/api/products/pre-workout`
       );
       const json = await response.json();
 

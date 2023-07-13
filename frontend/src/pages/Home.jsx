@@ -13,7 +13,7 @@ export const Home = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       const response = await fetch(
-        "https://supplement-inventroy.onrender.com/api/products"
+        `${import.meta.env.VITE_REQUEST_LINK}/api/products`
       );
       const json = await response.json();
 

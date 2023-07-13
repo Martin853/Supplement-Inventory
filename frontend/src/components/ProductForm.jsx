@@ -19,7 +19,7 @@ export const ProductForm = () => {
     console.log(product);
 
     const response = await fetch(
-      "https://supplement-inventroy.onrender.com/api/products",
+      `${import.meta.env.VITE_REQUEST_LINK}/api/products`,
       {
         method: "POST",
         body: JSON.stringify(product),

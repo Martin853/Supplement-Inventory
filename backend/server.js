@@ -35,7 +35,11 @@ app.use((req, res, next) => {
 
 app.use(
   cors({
-    origin: "https://supplement-inventory.netlify.app",
+    origin: [
+      "https://supplement-inventory.netlify.app",
+      "http://localhost:5173",
+    ],
+    default: "https://supplement-inventory.netlify.app",
   })
 );
 
