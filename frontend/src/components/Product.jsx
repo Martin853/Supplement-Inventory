@@ -21,7 +21,6 @@ export const Product = ({ product }) => {
           {product.category}
         </Link>
       </h1>
-      <h1>Price: {product.price}$</h1>
       <h1>Quantity: {product.quantity}</h1>
       <h1 className=' text-sm text-gray-500 font-bold'>{date.toUpperCase()}</h1>
     </div>

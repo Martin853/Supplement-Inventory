@@ -41,7 +41,7 @@ router.get("/:id", getProduct);
 
 // Post A New Product
 
-router.post("/:id", postProduct);
+router.post("/", postProduct);
 
 // Delete A Product
 

@@ -67,7 +67,7 @@ const getProduct = async (req, res) => {
 const postProduct = async (req, res) => {
   // Values
 
-  const { title, category, price, quantity } = req.body;
+  const { title, category, quantity } = req.body;
 
   let emptyFields = [];
 
@@ -79,31 +79,25 @@ const postProduct = async (req, res) => {
     emptyFields.push("category");
   }
 
-  if (!price) {
-    emptyFields.push("price");
-  }
-
   if (!quantity) {
     emptyFields.push("quantity");
   }
 
   // Validation
-  if (!title || !category || !price || !quantity) {
+  if (!title || !category || !quantity) {
     return res
       .status(400)
       .json({ error: "Missing required fields", emptyFields });
   }
 
-  if (typeof price !== "number" || typeof quantity !== "number") {
-    return res
-      .status(400)
-      .json({ error: "Invalid data type for price or quantity" });
+  if (typeof quantity !== "number") {
+    return res.status(400).json({ error: "Invalid data type for quantity" });
   }
 
   // Add document to database
 
   try {
-    const product = await Product.create({ title, category, price, quantity });
+    const product = await Product.create({ title, category, quantity });
     res.status(200).json(product);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -139,7 +133,7 @@ const patchProduct = async (req, res) => {
 
   // Values
 
-  const { title, category, price, quantity } = req.body;
+  const { title, category, quantity } = req.body;
 
   let emptyFields = [];
 
@@ -151,25 +145,19 @@ const patchProduct = async (req, res) => {
     emptyFields.push("category");
   }
 
-  if (!price) {
-    emptyFields.push("price");
-  }
-
   if (!quantity) {
     emptyFields.push("quantity");
   }
 
   // Validation
-  if (!title || !category || !price || !quantity) {
+  if (!title || !category || !quantity) {
     return res
       .status(400)
       .json({ error: "Missing required fields", emptyFields });
   }
 
-  if (typeof price !== "number" || typeof quantity !== "number") {
-    return res
-      .status(400)
-      .json({ error: "Invalid data type for price or quantity" });
+  if (typeof quantity !== "number") {
+    return res.status(400).json({ error: "Invalid data type for quantity" });
   }
 
   const product = await Product.findOneAndUpdate(

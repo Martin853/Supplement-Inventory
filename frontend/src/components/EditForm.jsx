@@ -7,7 +7,6 @@ export const EditForm = ({ product, setToggleEdit }) => {
 
   const [title, setTitle] = useState(product.title);
   const [category, setCategory] = useState(product.category);
-  const [price, setPrice] = useState(product.price);
   const [quantity, setQuantity] = useState(product.quantity);
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
@@ -19,12 +18,12 @@ export const EditForm = ({ product, setToggleEdit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const updatedProduct = { title, category, price, quantity };
+    const updatedProduct = { title, category, quantity };
 
     console.log(updatedProduct);
 
     const response = await fetch(
-      `https://supplement-inventroy.onrender.com/api/products/${product._id}`,
+      `${import.meta.env.VITE_REQUEST_LINK}/api/products/${product._id}`,
       {
         method: "PATCH",
         body: JSON.stringify(updatedProduct),
@@ -45,7 +44,6 @@ export const EditForm = ({ product, setToggleEdit }) => {
       setTitle("");
       setCategory("");
       setQuantity("");
-      setPrice("");
       setError(null);
       setEmptyFields([]);
       setToggleEdit(false);
@@ -120,19 +118,6 @@ export const EditForm = ({ product, setToggleEdit }) => {
             <option value={"Pre-Workout"}>Pre-Workout</option>
           </select>
 
-          <label className='text-lg'>Product Price:</label>
-          <input
-            className={
-              emptyFields.includes("price")
-                ? "outline-none p-2 rounded-lg border-2 border-red-400"
-                : "outline-none p-2 rounded-lg border-2 border-gray-200"
-            }
-            type='number'
-            onChange={(e) => {
-              setPrice(parseFloat(e.target.value));
-            }}
-            value={price}
-          />
           <label className='text-lg'>Product Quantity:</label>
           <input
             className={

@@ -6,7 +6,6 @@ export const ProductForm = () => {
 
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
-  const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
@@ -14,7 +13,7 @@ export const ProductForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const product = { title, category, price, quantity };
+    const product = { title, category, quantity };
 
     console.log(product);
 
@@ -40,7 +39,6 @@ export const ProductForm = () => {
       setTitle("");
       setCategory("");
       setQuantity("");
-      setPrice("");
       setError(null);
       setEmptyFields([]);
       console.log("New workout added, ", json);
@@ -87,19 +85,6 @@ export const ProductForm = () => {
         <option value={"Pre-Workout"}>Pre-Workout</option>
       </select>
 
-      <label className='text-lg'>Product Price:</label>
-      <input
-        className={
-          emptyFields.includes("price")
-            ? "outline-none p-2 rounded-lg border-2 border-red-400"
-            : "outline-none p-2 rounded-lg border-2 border-gray-200"
-        }
-        type='number'
-        onChange={(e) => {
-          setPrice(parseFloat(e.target.value));
-        }}
-        value={price}
-      />
       <label className='text-lg'>Product Quantity:</label>
       <input
         className={
