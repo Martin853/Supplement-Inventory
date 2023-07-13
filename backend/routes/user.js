@@ -5,14 +5,10 @@ const router = express.Router();
 
 // Login Route
 
-router.post("/login", () => {
-  loginUser;
-});
+router.post("/login", loginUser);
 
 // Signup Route
 
-router.post("/signup", () => {
-  signupUser;
-});
+router.post("/signup", signupUser);
 
 module.exports = router;
