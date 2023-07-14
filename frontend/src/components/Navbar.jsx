@@ -4,11 +4,27 @@ import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   return (
-    <div className='w-full h-fit bg-indigo-900 text-lg lg:text-3xl text-white flex flex-col items-center justify-between py-4 gap-2 md:gap-4'>
-      <Link to={"/"} className='flex gap-2 items-center h-fit'>
-        <img src={image} />
-        <h1 className='font-bold'>Supplement Inventory</h1>
-      </Link>
+    <div className='w-full h-fit bg-indigo-900 text-lg lg:text-3xl text-white flex flex-col items-center justify-between py-4 gap-3 md:gap-6'>
+      <div className='w-full flex flex-col items-center justify-center sm:flex-row sm:px-6 gap-2'>
+        <Link to={"/"} className='flex gap-2 items-center h-fit'>
+          <img src={image} />
+          <h1 className='font-bold'>Supplement Inventory</h1>
+        </Link>
+        <div className='flex gap-4 sm:ml-auto'>
+          <Link
+            to={"/signup"}
+            className='p-1 w-24 lg:w-44 text-center rounded-lg border-2 border-indigo-950 hover:bg-indigo-950 transition-all ease-in-out duration-300'
+          >
+            Sign Up
+          </Link>
+          <Link
+            to={"/login"}
+            className='p-1 w-24 lg:w-44 text-center rounded-lg border-2 border-indigo-950 hover:bg-indigo-950 transition-all ease-in-out duration-300'
+          >
+            Login
+          </Link>
+        </div>
+      </div>
       <div className='flex flex-wrap items-center justify-center w-fit gap-2 px-2 lg:text-3xl md:gap-4 lg:gap-7'>
         <Link
           to={"/"}

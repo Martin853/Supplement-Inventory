@@ -6,6 +6,8 @@ import { Protein } from "./pages/Protein";
 import { Creatine } from "./pages/Creatine";
 import { PreWorkout } from "./pages/PreWorkout";
 import { ManageInventory } from "./pages/ManageInventory";
+import { Signup } from "./pages/Authentication/Signup";
+import { Login } from "./pages/Authentication/Login";
 
 export const App = () => {
   return (
@@ -18,6 +20,8 @@ export const App = () => {
           <Route path='/creatine' element={<Creatine />} />
           <Route path='/pre-workout' element={<PreWorkout />} />
           <Route path='/manage-inventory' element={<ManageInventory />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/login' element={<Login />} />
         </Routes>
       </BrowserRouter>
     </div>
