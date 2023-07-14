@@ -14,10 +14,15 @@ const {
   getCreatines,
   getPreWorkouts,
 } = require("../controller/productController");
+const requireAuth = require("../middleware/requireAuth");
 
 // Router
 
 const router = express.Router();
+
+// requireAuth
+
+router.use(requireAuth);
 
 // Get All Products
 
