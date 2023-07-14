@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuthContext } from "./useAuthContext";
-import { useProductsContext } from "../context/ProductContext";
+import { useProductsContext } from "./useProductsContext";
 
 export const useLogout = () => {
   const { dispatch } = useAuthContext();
