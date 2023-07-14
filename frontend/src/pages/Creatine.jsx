@@ -2,18 +2,28 @@ import React, { useEffect } from "react";
 import { Product } from "../components/Product";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useProductsContext } from "../hooks/useProductsContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export const Creatine = () => {
   // Creatine
 
   const { products, dispatch } = useProductsContext();
 
+  // User
+
+  const { user } = useAuthContext();
+
   // Fetch Creatine
 
   useEffect(() => {
     const fetchCreatine = async () => {
       const response = await fetch(
-        `${import.meta.env.VITE_REQUEST_LINK}/api/products/creatine`
+        `${import.meta.env.VITE_REQUEST_LINK}/api/products/creatine`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
       );
       const json = await response.json();
 
@@ -22,8 +32,10 @@ export const Creatine = () => {
       }
     };
 
-    fetchCreatine();
-  }, []);
+    if (user) {
+      fetchCreatine();
+    }
+  }, [dispatch, user]);
 
   if (!products) {
     return (

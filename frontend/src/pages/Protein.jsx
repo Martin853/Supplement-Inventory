@@ -2,18 +2,28 @@ import React, { useEffect } from "react";
 import { Product } from "../components/Product";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useProductsContext } from "../hooks/useProductsContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export const Protein = () => {
   // Protein
 
   const { products, dispatch } = useProductsContext();
 
+  // User
+
+  const { user } = useAuthContext();
+
   // Fetch Protein
 
   useEffect(() => {
     const fetchProtein = async () => {
       const response = await fetch(
-        `${import.meta.env.VITE_REQUEST_LINK}/api/products/protein`
+        `${import.meta.env.VITE_REQUEST_LINK}/api/products/protein`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
       );
       const json = await response.json();
 
@@ -22,8 +32,10 @@ export const Protein = () => {
       }
     };
 
-    fetchProtein();
-  }, []);
+    if (user) {
+      fetchProtein();
+    }
+  }, [dispatch, user]);
 
   if (!products) {
     return (

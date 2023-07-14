@@ -2,18 +2,28 @@ import React, { useEffect } from "react";
 import { Product } from "../components/Product";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useProductsContext } from "../hooks/useProductsContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export const PreWorkout = () => {
   // Pre Workout
 
   const { products, dispatch } = useProductsContext();
 
+  // User
+
+  const { user } = useAuthContext();
+
   // Fetch Pre Workout
 
   useEffect(() => {
     const fetchPreWorkout = async () => {
       const response = await fetch(
-        `${import.meta.env.VITE_REQUEST_LINK}/api/products/pre-workout`
+        `${import.meta.env.VITE_REQUEST_LINK}/api/products/pre-workout`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
       );
       const json = await response.json();
 
@@ -22,8 +32,10 @@ export const PreWorkout = () => {
       }
     };
 
-    fetchPreWorkout();
-  }, []);
+    if (user) {
+      fetchPreWorkout();
+    }
+  }, [dispatch, user]);
 
   if (!products) {
     return (

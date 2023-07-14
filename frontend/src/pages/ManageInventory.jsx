@@ -3,18 +3,28 @@ import { ProductManage } from "../components/ProductManage";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { ProductForm } from "../components/ProductForm";
 import { useProductsContext } from "../hooks/useProductsContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export const ManageInventory = () => {
   // Products
 
   const { products, refresh, dispatch } = useProductsContext();
 
+  // User
+
+  const { user } = useAuthContext();
+
   // Fetch Products
 
   useEffect(() => {
     const fetchProducts = async () => {
       const response = await fetch(
-        `${import.meta.env.VITE_REQUEST_LINK}/api/products`
+        `${import.meta.env.VITE_REQUEST_LINK}/api/products`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
       );
       const json = await response.json();
 
@@ -23,8 +33,10 @@ export const ManageInventory = () => {
       }
     };
 
-    fetchProducts();
-  }, [refresh]);
+    if (user) {
+      fetchProducts();
+    }
+  }, [dispatch, user]);
 
   if (!products) {
     return (

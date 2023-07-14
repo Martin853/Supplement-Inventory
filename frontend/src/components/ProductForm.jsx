@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useProductsContext } from "../hooks/useProductsContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export const ProductForm = () => {
   const { dispatch } = useProductsContext();
+  const { user } = useAuthContext();
 
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
@@ -12,6 +14,11 @@ export const ProductForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!user) {
+      setError("You must be logged in");
+      return;
+    }
 
     const product = { title, category, quantity };
 
@@ -24,6 +31,7 @@ export const ProductForm = () => {
         body: JSON.stringify(product),
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
         },
       }
     );

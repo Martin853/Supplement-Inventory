@@ -5,6 +5,7 @@ import { useProductsContext } from "../hooks/useProductsContext";
 
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { EditForm } from "./EditForm";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export const ProductManage = ({ product }) => {
   const baseURL = window.location.origin;
@@ -20,12 +21,20 @@ export const ProductManage = ({ product }) => {
   });
 
   const { dispatch } = useProductsContext();
+  const { user } = useAuthContext();
 
   const handleDelete = async () => {
+    if (!user) {
+      return;
+    }
+
     const response = await fetch(
       `${import.meta.env.VITE_REQUEST_LINK}/api/products/` + product._id,
       {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
       }
     );
 
