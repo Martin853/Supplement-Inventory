@@ -25,18 +25,28 @@ export const Protein = () => {
     fetchProtein();
   }, []);
 
+  if (!products) {
+    return (
+      <div className='flex flex-col justify-center items-center gap-3 w-full h-screen col-span-3'>
+        <h1 className='text-4xl'>Loading...</h1>
+        <AiOutlineLoading3Quarters className='animate-spin text-4xl ' />
+      </div>
+    );
+  }
+
+  if (products.length === 0) {
+    return (
+      <div className='flex flex-col justify-center items-center gap-3 w-full h-screen col-span-3'>
+        <h1 className='text-4xl'>There are no products in your inventory</h1>
+      </div>
+    );
+  }
+
   return (
     <div className='w-full p-4 grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3'>
-      {products ? (
-        products.map((product) => (
-          <Product key={product._id} product={product} />
-        ))
-      ) : (
-        <div className='flex flex-col justify-center items-center gap-3 w-screen h-screen'>
-          <h1 className='text-4xl'>Loading...</h1>
-          <AiOutlineLoading3Quarters className='animate-spin text-4xl ' />
-        </div>
-      )}
+      {products.map((product) => (
+        <Product key={product._id} product={product} />
+      ))}
     </div>
   );
 };
