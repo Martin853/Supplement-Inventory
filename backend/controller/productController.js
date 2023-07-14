@@ -9,7 +9,9 @@ const Product = require("../models/productModel");
 // Get All Products
 
 const getProducts = async (req, res) => {
-  const products = await Product.find({}).sort({ createdAt: -1 });
+  const user_id = req.user._id;
+
+  const products = await Product.find({ user_id }).sort({ createdAt: -1 });
 
   res.status(200).json(products);
 };
@@ -97,7 +99,13 @@ const postProduct = async (req, res) => {
   // Add document to database
 
   try {
-    const product = await Product.create({ title, category, quantity });
+    const user_id = req.user._id;
+    const product = await Product.create({
+      title,
+      category,
+      quantity,
+      user_id,
+    });
     res.status(200).json(product);
   } catch (error) {
     res.status(400).json({ error: error.message });

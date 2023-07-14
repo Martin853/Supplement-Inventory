@@ -25,6 +25,10 @@ const productSchema = new Schema(
       max: 100,
       min: 1,
     },
+    user_id: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
