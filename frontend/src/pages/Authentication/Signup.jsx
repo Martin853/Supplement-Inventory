@@ -43,7 +43,11 @@ export const Signup = () => {
         >
           Sign Up
         </button>
-        {error && <div className=''>{error}</div>}
+        {error && (
+          <div className='w-full h-fit bg-red-200 mt-2 p-4 rounded-lg border-2 border-red-700 text-red-700 flex justify-center items-center'>
+            {error}
+          </div>
+        )}
       </form>
     </div>
   );
