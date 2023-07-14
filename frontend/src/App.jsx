@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useAuthContext } from "./hooks/useAuthContext";
 import { Home } from "./pages/Home";
 import { Navbar } from "./components/Navbar";
 import { Protein } from "./pages/Protein";
@@ -10,18 +11,41 @@ import { Signup } from "./pages/Authentication/Signup";
 import { Login } from "./pages/Authentication/Login";
 
 export const App = () => {
+  const { user } = useAuthContext();
+
   return (
     <div className='font-montserrat'>
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/protein' element={<Protein />} />
-          <Route path='/creatine' element={<Creatine />} />
-          <Route path='/pre-workout' element={<PreWorkout />} />
-          <Route path='/manage-inventory' element={<ManageInventory />} />
-          <Route path='/signup' element={<Signup />} />
-          <Route path='/login' element={<Login />} />
+          <Route
+            path='/'
+            element={user ? <Home /> : <Navigate to='/login' />}
+          />
+          <Route
+            path='/protein'
+            element={user ? <Protein /> : <Navigate to='/login' />}
+          />
+          <Route
+            path='/creatine'
+            element={user ? <Creatine /> : <Navigate to='/login' />}
+          />
+          <Route
+            path='/pre-workout'
+            element={user ? <PreWorkout /> : <Navigate to='/login' />}
+          />
+          <Route
+            path='/manage-inventory'
+            element={user ? <ManageInventory /> : <Navigate to='/login' />}
+          />
+          <Route
+            path='/signup'
+            element={!user ? <Signup /> : <Navigate to='/' />}
+          />
+          <Route
+            path='/login'
+            element={!user ? <Login /> : <Navigate to='/' />}
+          />
         </Routes>
       </BrowserRouter>
     </div>
