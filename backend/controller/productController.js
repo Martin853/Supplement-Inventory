@@ -19,7 +19,9 @@ const getProducts = async (req, res) => {
 // Get All Protein Products
 
 const getProteins = async (req, res) => {
-  const proteins = await Product.find({ category: "Protein" }).sort({
+  const user_id = req.user._id;
+
+  const proteins = await Product.find({ category: "Protein", user_id }).sort({
     createdAt: -1,
   });
 
@@ -29,7 +31,9 @@ const getProteins = async (req, res) => {
 // Get All Cretine Products
 
 const getCreatines = async (req, res) => {
-  const creatines = await Product.find({ category: "Creatine" }).sort({
+  const user_id = req.user._id;
+
+  const creatines = await Product.find({ category: "Creatine", user_id }).sort({
     createdAt: -1,
   });
 
@@ -39,7 +43,12 @@ const getCreatines = async (req, res) => {
 // Get All Pre-Workout Products
 
 const getPreWorkouts = async (req, res) => {
-  const preWorkouts = await Product.find({ category: "Pre-Workout" }).sort({
+  const user_id = req.user._id;
+
+  const preWorkouts = await Product.find({
+    category: "Pre-Workout",
+    user_id,
+  }).sort({
     createdAt: -1,
   });
 
